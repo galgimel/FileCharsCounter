@@ -5,9 +5,11 @@ import java.io.*;
 import java.util.Scanner;
 
 public class CharsCounter {
-    public void stringCharCounter(File file) throws FileNotFoundException {
+
+    public CharsCounterDTO stringCharCounter(File file) throws FileNotFoundException {
         CharsCounterDTO dto = new CharsCounterDTO();
         Scanner scanner = new Scanner(file);
+
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             char[] chars = line.toCharArray();
@@ -26,5 +28,6 @@ public class CharsCounter {
             dto.getSymbols().add(symbol);
         }
         scanner.close();
+        return dto;
     }
 }

@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import java.util.Objects;
 import java.util.Scanner;
 
 import static org.example.Constants.*;
@@ -17,12 +16,13 @@ public class Formatter {
     }
 
     public String format(File file) throws IOException {
-        CharsCounterDTO dto = new CharsCounterDTO();
-        Scanner scanner = new Scanner(file);
         StringBuilder result = new StringBuilder();
-        counter.stringCharCounter(file);
-        int max = maxLineLength(file) + 1;
+        int max = maxLineLength(file);
         int count = -1;
+
+        counter.stringCharCounter(file);
+        CharsCounterDTO dto = counter.stringCharCounter(file);
+        Scanner scanner = new Scanner(file);
 
         while (scanner.hasNextLine()) {
             String fileString = scanner.nextLine();
