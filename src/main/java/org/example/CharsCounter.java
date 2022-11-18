@@ -1,17 +1,13 @@
 package org.example;
 
-import java.io.*;
-
-import java.util.Scanner;
+import java.util.List;
 
 public class CharsCounter {
 
-    public CharsCounterDTO stringCharCounter(File file) throws FileNotFoundException {
+    public CharsCounterDTO stringCharCounter(List<String> array) {
         CharsCounterDTO dto = new CharsCounterDTO();
-        Scanner scanner = new Scanner(file);
 
-        while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
+        for (String line : array) {
             char[] chars = line.toCharArray();
             int letter = 0;
             int digit = 0;
@@ -27,7 +23,6 @@ public class CharsCounter {
             dto.getLetters().add(letter);
             dto.getSymbols().add(symbol);
         }
-        scanner.close();
         return dto;
     }
 }

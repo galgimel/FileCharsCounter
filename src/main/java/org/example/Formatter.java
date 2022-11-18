@@ -1,11 +1,6 @@
 package org.example;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import java.util.Scanner;
-
+import java.util.List;
 import static org.example.Constants.*;
 
 public class Formatter {
@@ -15,37 +10,30 @@ public class Formatter {
         this.counter = counter;
     }
 
-    public String format(File file) throws IOException {
+    public String format(List<String> array) {
         StringBuilder result = new StringBuilder();
-        int max = maxLineLength(file);
+        int max = maxLineLength(array);
         int count = -1;
 
-        counter.stringCharCounter(file);
-        CharsCounterDTO dto = counter.stringCharCounter(file);
-        Scanner scanner = new Scanner(file);
+        counter.stringCharCounter(array);
+        CharsCounterDTO dto = counter.stringCharCounter(array);
 
-        while (scanner.hasNextLine()) {
-            String fileString = scanner.nextLine();
+        for (String fileString : array) {
             count++;
-            result.append(
-                fileString +
-                    space(max - fileString.length(), CHAR_SPACE_SPLIT) +
-                    SPLIT +
-                    dto.getLetters().get(count) +
-                    SPLIT +
-                    dto.getSymbols().get(count) +
-                    "\n"
-            );
+            result.append(fileString)
+                .append(space(max - fileString.length(), CHAR_SPACE_SPLIT))
+                .append(SPLIT)
+                .append(dto.getLetters().get(count))
+                .append(SPLIT)
+                .append(dto.getSymbols().get(count))
+                .append("\n");
         }
-        scanner.close();
         return result.toString();
     }
 
-    private int maxLineLength(File file) throws FileNotFoundException {
-        Scanner scanner = new Scanner(file);
+    private int maxLineLength(List<String> array) {
         int max = 0;
-        while (scanner.hasNextLine()) {
-            String fileString = scanner.nextLine();
+        for (String fileString : array) {
             if (fileString.length() > max) {
                 max = fileString.length();
             }
