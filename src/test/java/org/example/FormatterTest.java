@@ -14,7 +14,7 @@ class FormatterTest {
 
     @ParameterizedTest
     @MethodSource("expectedAnswer")
-    void format(List fileArray, String expected) {
+    void format(List<String> fileArray, String expected) {
         CharsCounter counter = new CharsCounter();
         Formatter formatter = new Formatter(counter);
         String actual = formatter.format(fileArray);
@@ -33,7 +33,7 @@ class FormatterTest {
 
         List<String> list3 = new ArrayList<>();
         list3.add("                                    ");
-        list3.add("\\Letter\\ and \'Symbol\'");
+        list3.add("\\Letter\\ and 'Symbol'");
         return Stream.of(
             Arguments.of(list1,
                 "Ешь ананасы, рябчиков жуй,            |21|5\n" +
